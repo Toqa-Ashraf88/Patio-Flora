@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patio Flora - Boutique Flower Shop</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --bg-primary: lavenderblush;
+            --bg-card: white;
+            --text-dark: darkslategray;
+            --text-muted: gray;
+            --accent-pink: hotpink;
+            --accent-pink-hover: deeppink;
+            --accent-gold: goldenrod;
+            --border-color: pink;
+        }
+
+        body { 
+            background-color: var(--bg-primary); 
+            color: var(--text-dark); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            transition: all 0.3s ease;
+        }
+
+        .text-gold { color: var(--accent-gold); }
+        .text-pink { color: var(--accent-pink-hover); }
+
+        .navbar-custom {
+            background-color: snow;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 2px;
+            left: 50%;
+            background-color: var(--accent-pink-hover);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 70%;
+        }
+        .nav-link:hover {
+            color: var(--accent-pink-hover) !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url("flower1.jpeg") center/cover no-repeat;
+            height: 85vh;
+        }
+
+
+        .img-hover-zoom {
+            overflow: hidden;
+            border-radius: 50%;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .img-hover-zoom img {
+            transition: transform 0.5s ease;
+        }
+        .img-hover-zoom:hover img {
+            transform: scale(1.08);
+        }
+        .img-hover-zoom:hover {
+            box-shadow: 0 10px 25px lightpink;
+        }
+
+        .card-custom {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .card-custom:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px mistypink;
+            border-color: var(--accent-pink);
+        }
+        .card-custom .card-img-top {
+            transition: transform 0.5s ease;
+            height: 280px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .card-custom:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        .menu-item-row {
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .menu-item-row:hover {
+            background-color: mistyrose;
+            transform: translateX(4px);
+        }
+        .dots-leader {
+            flex-grow: 1;
+            border-bottom: 1px dotted var(--accent-pink);
+            margin: 0 10px;
+            position: relative;
+            top: -4px;
+        }
+
+        .btn-pink {
+            background-color: var(--accent-pink);
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-pink:hover {
+            background-color: var(--accent-pink-hover);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px pink;
+        }
+        .btn-outline-pink {
+            border: 1px solid var(--accent-pink-hover);
+            color: var(--accent-pink-hover);
+            transition: all 0.3s ease;
+        }
+        .btn-outline-pink:hover {
+            background-color: var(--accent-pink-hover);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hover-zoom-img {
+            transition: transform 0.4s ease;
+        }
+        .hover-zoom-img:hover {
+            transform: scale(1.06);
+        }
+
+
+        .toast-container {
+            z-index: 1100;
+        }
+        .custom-toast {
+            background-color: var(--bg-card);
+            border-left: 4px solid var(--accent-pink-hover);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand text-pink fw-bold tracking-wider fs-4" href="#">Patio Flora</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#fresh">Fresh Cut</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#catalog">Catalog</a></li>
+                </ul>
+                <button class="btn btn-outline-pink btn-sm px-3 rounded-pill">Contact Us</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section d-flex align-items-center justify-content-center text-center">
+        <div>
+            <span class="text-white text-uppercase tracking-widest small">Welcome to</span>
+            <h1 class="display-2 fw-bold text-white my-2">Patio Flora</h1>
+            <p class="lead text-light">Exquisite Floral Arrangements for Life's Most Memorable Moments</p>
+        </div>
+    </header>
+
+    <section id="featured" class="py-5 container">
+        <div class="text-center my-4">
+            <span class="text-pink small text-uppercase fw-bold">Premium Choice</span>
+            <h2 class="text-dark fw-bold">FLOWER MENU</h2>
+        </div>
+
+        <div class="row align-items-center my-5">
+            <div class="col-md-6 text-center mb-4 mb-md-0">
+                <div class="img-hover-zoom d-inline-block p-2 border border-2 border-danger-subtle">
+                    <img src="flower2.jpeg" class="img-fluid rounded-circle" alt="Classic Red Roses" style="width: 300px; height: 300px; object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3 class="text-pink">Classic Red Roses</h3>
+                <p class="text-muted small">Hand-picked Ecuadorian long-stem red roses wrapped in premium blush paper.</p>
+                
+                <div class="menu-item-row d-flex align-items-center justify-content-between my-2">
+                    <span>Standard (12 Stems)</span>
+                    <span class="dots-leader"></span>
+                    <span class="text-gold fw-bold me-3">$45.00</span>
+                    <button class="btn btn-pink btn-sm rounded-pill px-3 add-to-cart-btn" data-name="Classic Red Roses (Standard)">Add</button>
+                </div>
+                <div class="menu-item-row d-flex align-items-center justify-content-between my-2">
+                    <span>Deluxe (24 Stems)</span>
+                    <span class="dots-leader"></span>
+                    <span class="text-gold fw-bold me-3">$80.00</span>
+                    <button class="btn btn-pink btn-sm rounded-pill px-3 add-to-cart-btn" data-name="Classic Red Roses (Deluxe)">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center my-5 flex-md-row-reverse">
+            <div class="col-md-6 text-center mb-4 mb-md-0">
+                <div class="img-hover-zoom d-inline-block p-2 border border-2 border-danger-subtle">
+                    <img src="flower3.jpeg" class="img-fluid rounded-circle" alt="Dutch Tulips" style="width: 300px; height: 300px; object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3 class="text-pink">Dutch Tulip Collection</h3>
+                <p class="text-muted small">Vibrant imported tulips available in seasonal pastels and rich jewel tones.</p>
+                
+                <div class="menu-item-row d-flex align-items-center justify-content-between my-2">
+                    <span>Bouquet (10 Stems)</span>
+                    <span class="dots-leader"></span>
+                    <span class="text-gold fw-bold me-3">$35.00</span>
+                    <button class="btn btn-pink btn-sm rounded-pill px-3 add-to-cart-btn" data-name="Dutch Tulips (10 Stems)">Add</button>
+                </div>
+                <div class="menu-item-row d-flex align-items-center justify-content-between my-2">
+                    <span>Bouquet (20 Stems)</span>
+                    <span class="dots-leader"></span>
+                    <span class="text-gold fw-bold me-3">$65.00</span>
+                    <button class="btn btn-pink btn-sm rounded-pill px-3 add-to-cart-btn" data-name="Dutch Tulips (20 Stems)">Add</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fresh" class="py-5" style="background-color: mistyrose;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="text-pink small text-uppercase fw-bold">Fresh Selection</span>
+                <h2 class="text-dark fw-bold">FRESH BLOOMS</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card card-custom h-100 rounded-4">
+                        <div class="overflow-hidden">
+                            <img src="flower4.jpeg" class="card-img-top" alt="Blush Peonies">
+                        </div>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="card-title text-pink mb-0">Blush Peonies</h5>
+                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle">$25.00</span>
+                                </div>
+                                <p class="card-text text-muted small">Soft pink peonies offering a delicate fragrance and full, lush blooms.</p>
+                            </div>
+                            <button class="btn btn-pink btn-sm w-100 mt-3 rounded-pill add-to-cart-btn" data-name="Blush Peonies">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom h-100 rounded-4">
+                        <div class="overflow-hidden">
+                            <img src="flower5.jpeg" class="card-img-top" alt="Sunflowers">
+                        </div>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="card-title text-pink mb-0">Golden Sunflowers</h5>
+                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle">$18.00</span>
+                                </div>
+                                <p class="card-text text-muted small">Bright, cheerful sunflowers paired with eucalyptus greenery.</p>
+                            </div>
+                            <button class="btn btn-pink btn-sm w-100 mt-3 rounded-pill add-to-cart-btn" data-name="Golden Sunflowers">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom h-100 rounded-4">
+                        <div class="overflow-hidden">
+                            <img src="flower6.jpeg" class="card-img-top" alt="Orchids">
+                        </div>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="card-title text-pink mb-0">Phalaenopsis Orchid</h5>
+                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle">$50.00</span>
+                                </div>
+                                <p class="card-text text-muted small">Elegantly potted double-stem white orchid, perfect for home decor.</p>
+                            </div>
+                            <button class="btn btn-pink btn-sm w-100 mt-3 rounded-pill add-to-cart-btn" data-name="Phalaenopsis Orchid">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog" class="py-5 container">
+        <div class="text-center mb-5">
+            <span class="text-pink small text-uppercase fw-bold">Full Menu</span>
+            <h2 class="text-dark fw-bold">À LA CARTE</h2>
+        </div>
+        <div class="row g-5">
+            <div class="col-md-6">
+                <h4 class="text-pink border-bottom border-2 border-danger-subtle pb-2 mb-4 text-uppercase">Arrangements</h4>
+                
+                <div class="menu-item-row mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0 text-dark fw-bold">White Rose Glass Vase <span class="badge bg-warning text-dark ms-2">Popular</span></h6>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="text-gold fw-bold">$55.00</span>
+                            <button class="btn btn-pink btn-sm rounded-pill px-3 add-to-cart-btn" data-name="White Rose Glass Vase">Add</button>
+                        </div>
+                    </div>
+                    <small class="text-muted d-block mt-1">15 premium white roses arranged in a clear cylinder vase.</small>
+                </div>
+
+                <div class="menu-item-row mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0 text-dark fw-bold">Luxury Flower & Chocolate Box</h6>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="text-gold fw-bold">$90.00</span>
+                            <button class="btn btn-pink btn-sm rounded-pill px-3 add-to-cart-btn" data-name="Luxury Flower & Chocolate Box">Add</button>
+                        </div>
+                    </div>
+                    <small class="text-muted d-block mt-1">Acrylic display box filled with red roses and artisan chocolates.</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h4 class="text-pink border-bottom border-2 border-danger-subtle pb-2 mb-4 text-uppercase">Plants & Botanicals</h4>
+                
+                <div class="menu-item-row mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0 text-dark fw-bold">Monstera Deliciosa</h6>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="text-gold fw-bold">$30.00</span>
+                            <button class="btn btn-pink btn-sm rounded-pill px-3 add-to-cart-btn" data-name="Monstera Deliciosa">Add</button>
+                        </div>
+                    </div>
+                    <small class="text-muted d-block mt-1">Potted indoor plant known for its distinctive split leaves.</small>
+                </div>
+
+                <div class="menu-item-row mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0 text-dark fw-bold">Lucky Bamboo Vase <span class="badge bg-warning text-dark ms-2">New</span></h6>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="text-gold fw-bold">$22.00</span>
+                            <button class="btn btn-pink btn-sm rounded-pill px-3 add-to-cart-btn" data-name="Lucky Bamboo Vase">Add</button>
+                        </div>
+                    </div>
+                    <small class="text-muted d-block mt-1">Arrangement of 3 braided bamboo stalks in glass bowl.</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 border-top border-danger-subtle" style="background-color: mistyrose;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="row g-2">
+                        <div class="col-6 overflow-hidden rounded-3">
+                            <img src="flowerrrr.jpeg" class="img-fluid rounded hover-zoom-img" alt="Storefront 1">
+                        </div>
+                        <div class="col-6 overflow-hidden rounded-3">
+                            <img src="image.jpeg" class="img-fluid rounded hover-zoom-img" alt="Storefront 2">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 ps-md-5">
+                    <span class="text-pink text-uppercase small fw-bold">Quality & Freshness</span>
+                    <h2 class="text-dark my-3 fw-bold">VISIT OUR FLORAL BISTRO</h2>
+                    <p class="text-muted small">We source our stems directly from sustainable growers worldwide, ensuring every bloom stays radiant and fresh in your home for as long as possible.</p>
+                    <button class="btn btn-pink rounded-pill px-4 mt-2">Explore Gallery</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 text-center border-top border-danger-subtle small text-muted bg-white">
+        <div class="container">
+            <p class="mb-1 text-pink fw-bold">Patio Flora Bistro & Flowers</p>
+            <p class="mb-0">&copy; 2026 All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="cartToast" class="toast custom-toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2">
+                    <span class="fs-5">🌸</span>
+                    <div>
+                        <strong class="d-block text-pink" id="toastItemName">Item</strong>
+                        <small class="text-muted">Item has been added to your cart successfully!</small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toastElement = document.getElementById('cartToast');
+            const toastItemName = document.getElementById('toastItemName');
+            const bsToast = new bootstrap.Toast(toastElement, { delay: 3000 });
+
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const itemName = this.getAttribute('data-name') || 'Item';
+                    toastItemName.textContent = itemName;
+                    bsToast.show();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
